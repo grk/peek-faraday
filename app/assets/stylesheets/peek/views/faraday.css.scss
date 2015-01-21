@@ -41,6 +41,11 @@ $request_path_width: $width - $time_width - $request_method_width;
       > .peek-faraday-request-path {
         width: $request_path_width;
       }
+      > .peek-faraday-request-callstack {
+        font-family: monospace;
+        white-space: pre;
+        margin-left: 2em;
+      }
     }
   }
 }
