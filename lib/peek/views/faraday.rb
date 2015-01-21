@@ -38,8 +38,12 @@ module Peek
           duration = (finish - start)
           @duration.update { |value| value + duration }
           @calls.update { |value| value + 1 }
-          @requests.update { |value| (value + [{:method => env[:method].to_s.upcase, :path => env[:url].to_s, :duration => '%.2f' % duration, :callstack => clean_backtrace}]).freeze }
+          @requests.update { |value| (value + [{:method => payload[:method].to_s.upcase, :path => payload[:url].to_s, :duration => '%.2f' % duration, :callstack => clean_backtrace}]).freeze }
         end
+      end
+
+      def clean_backtrace
+        Rails.backtrace_cleaner.clean(caller).join("\n")
       end
     end
   end
