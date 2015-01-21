@@ -21,7 +21,7 @@ module Peek
       end
 
       def results
-        { :duration => formatted_duration, :calls => @calls.value }
+        { :duration => formatted_duration, :calls => @calls.value, :requests => @requests.value }
       end
 
       private
