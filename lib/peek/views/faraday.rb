@@ -6,6 +6,7 @@ module Peek
       def initialize(options = {})
         @duration = Atomic.new(0)
         @calls = Atomic.new(0)
+        @requests = Atomic.new([].freeze)
 
         setup_subscribers
       end
@@ -30,12 +31,14 @@ module Peek
         before_request do
           @duration.value = 0
           @calls.value = 0
+          @requests.value = [].freeze
         end
 
         subscribe(/request.faraday/) do |name, start, finish, id, payload|
           duration = (finish - start)
           @duration.update { |value| value + duration }
           @calls.update { |value| value + 1 }
+          @requests.update { |value| (value + [{:method => env[:method].to_s.upcase, :path => env[:url].to_s, :duration => '%.2f' % duration, :callstack => clean_backtrace}]).freeze }
         end
       end
     end
