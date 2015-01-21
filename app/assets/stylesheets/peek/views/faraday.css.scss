@@ -1,0 +1,46 @@
+#peek-faraday-details-toggle {
+  cursor: pointer;
+}
+$width: 800px;
+$time_width: 70px;
+$request_method_width: 40px;
+$request_path_width: $width - $time_width - $request_method_width;
+#peek-faraday-details {
+  > ul {
+    position: absolute;
+    z-index: 1000;
+    right: 20px;
+    width: $width;
+    border: solid 1px black;
+    background: white;
+    border-radius: 3px;
+    padding: 3px;
+    line-height: 15px;
+    font-size: 13px;
+    text-shadow: none;
+    > li {
+      border-top: solid 1px rgb(153,153,153);
+      &:first-child { border-top: none; }
+      padding: 2px 0;
+      > span {
+        display: inline-block;
+        vertical-align: top;
+      }
+      > .peek-faraday-request-duration {
+        width: $time_width - 5px;
+        padding-right: 5px;
+        text-align: right;
+      }
+      > .peek-faraday-request-method, > .peek-faraday-request-path {
+        color: black;
+        font-family: monospace;
+      }
+      > .peek-faraday-request-method {
+        width: $request_method_width;
+      }
+      > .peek-faraday-request-path {
+        width: $request_path_width;
+      }
+    }
+  }
+}
