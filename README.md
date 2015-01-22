@@ -29,6 +29,20 @@ Add the following to your `config/initializers/peek.rb`:
 Peek.into Peek::Views::Faraday
 ```
 
+Add the following to your `app/assets/javascripts/application.js`:
+
+```javascript
+//= require peek/views/faraday
+```
+
+Add the following to your `app/assets/javascripts/application.css`:
+
+```css
+/*
+ *= require peek/views/faraday
+ */
+```
+
 Configure your Faraday connection to use instrumentation
 
 ```ruby
