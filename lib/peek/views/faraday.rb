@@ -12,7 +12,7 @@ module Peek
       end
 
       def formatted_duration
-        ms = @duration.value * 1000
+        ms = @duration.value
         if ms >= 1000
           "%.2fms" % ms
         else
@@ -35,10 +35,10 @@ module Peek
         end
 
         subscribe(/request.faraday/) do |name, start, finish, id, payload|
-          duration = (finish - start)
+          duration = (finish - start) * 1000
           @duration.update { |value| value + duration }
           @calls.update { |value| value + 1 }
-          @requests.update { |value| (value + [{:method => payload[:method].to_s.upcase, :path => payload[:url].to_s, :duration => '%.2f' % duration, :callstack => clean_backtrace}]).freeze }
+          @requests.update { |value| (value + [{:method => payload[:method].to_s.upcase, :path => payload[:url].to_s, :duration => '%.2fms' % duration, :callstack => clean_backtrace}]).freeze }
         end
       end
 
