@@ -18,6 +18,7 @@ $request_path_width: $width - $time_width - $request_method_width;
     line-height: 15px;
     font-size: 13px;
     text-shadow: none;
+    list-style-type: none;
     > li {
       border-top: solid 1px rgb(153,153,153);
       &:first-child { border-top: none; }
